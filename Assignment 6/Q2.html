@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Validation on Blur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .message {
+      margin-top: 8px;
+      font-size: 0.9em;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form>
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="Enter your email">
+      <div id="emailMessage" class="message"></div>
+    </form>
+  </div>
+
+  <script>
+    const emailInput = document.getElementById("email");
+    const emailMessage = document.getElementById("emailMessage");
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+    emailInput.addEventListener("blur", function () {
+      if (emailInput.value.trim() === "") {
+        emailMessage.textContent = "Email cannot be empty";
+        emailMessage.className = "message error";
+      } else if (emailPattern.test(emailInput.value)) {
+        emailMessage.textContent = "Valid email ✅";
+        emailMessage.className = "message success";
+      } else {
+        emailMessage.textContent = "Invalid email format ❌";
+        emailMessage.className = "message error";
+      }
+    });
+  </script>
+</body>
+</html>

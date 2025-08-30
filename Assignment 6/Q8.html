@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hex Color Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 15px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .preview {
+      width: 100px;
+      height: 100px;
+      margin: 10px auto;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .message {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Hex Color Validator</h2>
+    <input type="text" id="colorInput" placeholder="#FFF or #FFFFFF">
+    <div id="message" class="message"></div>
+    <div class="preview" id="preview"></div>
+  </div>
+
+  <script>
+    const colorInput = document.getElementById("colorInput");
+    const message = document.getElementById("message");
+    const preview = document.getElementById("preview");
+    const hexPattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+
+    colorInput.addEventListener("input", function() {
+      const value = colorInput.value;
+      if (hexPattern.test(value)) {
+        message.textContent = "Valid color code ✅";
+        message.className = "message success";
+        preview.style.background = value;
+      } else {
+        message.textContent = "Invalid color code ❌";
+        message.className = "message error";
+        preview.style.background = "#fff";
+      }
+    });
+  </script>
+</body>
+</html>

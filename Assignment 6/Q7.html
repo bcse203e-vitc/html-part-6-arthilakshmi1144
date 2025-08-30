@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Format Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .message {
+      font-size: 0.9em;
+      margin-top: 5px;
+      color: red;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Date Validation Form</h2>
+    <form id="dateForm">
+      <div class="form-group">
+        <label for="date">Enter Date (DD/MM/YYYY):</label>
+        <input type="text" id="date" placeholder="DD/MM/YYYY">
+        <div id="message" class="message"></div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const dateInput = document.getElementById("date");
+    const message = document.getElementById("message");
+    const form = document.getElementById("dateForm");
+    const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
+
+    form.addEventListener("submit", function(e) {
+      if (!datePattern.test(dateInput.value)) {
+        e.preventDefault();
+        message.textContent = "Invalid format ❌ Please enter date as DD/MM/YYYY";
+      } else {
+        message.textContent = "";
+        alert("Form submitted successfully ✅");
+      }
+    });
+  </script>
+</body>
+</html>

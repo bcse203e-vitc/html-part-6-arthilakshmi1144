@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Match Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .message {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Password Match Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password">
+        <div id="message" class="message"></div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const message = document.getElementById("message");
+
+    function checkMatch() {
+      if (password.value === "" && confirmPassword.value === "") {
+        message.textContent = "";
+        message.className = "message";
+      } else if (password.value === confirmPassword.value) {
+        message.textContent = "Passwords match ✅";
+        message.className = "message success";
+      } else {
+        message.textContent = "Passwords do not match ❌";
+        message.className = "message error";
+      }
+    }
+
+    password.addEventListener("input", checkMatch);
+    confirmPassword.addEventListener("input", checkMatch);
+  </script>
+</body>
+</html>

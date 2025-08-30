@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Username Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .message {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Username Form</h2>
+    <form id="usernameForm">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <div id="message" class="message"></div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const usernameInput = document.getElementById("username");
+    const message = document.getElementById("message");
+    const form = document.getElementById("usernameForm");
+    const usernamePattern = /^[a-zA-Z0-9_]{3,16}$/;
+
+    form.addEventListener("submit", function(e) {
+      if (!usernamePattern.test(usernameInput.value)) {
+        e.preventDefault();
+        message.textContent = "Invalid username ❌ (3–16 chars, only letters, numbers, underscores)";
+        message.className = "message error";
+      } else {
+        message.textContent = "Valid username ✅";
+        message.className = "message success";
+      }
+    });
+  </script>
+</body>
+</html>

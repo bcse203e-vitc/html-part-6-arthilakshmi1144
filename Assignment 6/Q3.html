@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Phone Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .message {
+      margin-top: 8px;
+      font-size: 0.9em;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form>
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone" placeholder="(123) 456-7890 or 123-456-7890">
+      <div id="phoneMessage" class="message"></div>
+    </form>
+  </div>
+
+  <script>
+    const phoneInput = document.getElementById("phone");
+    const phoneMessage = document.getElementById("phoneMessage");
+    const phonePattern = /^(\(\d{3}\)\s?\d{3}-\d{4}|\d{3}-\d{3}-\d{4})$/;
+
+    phoneInput.addEventListener("input", function () {
+      if (phoneInput.value.trim() === "") {
+        phoneMessage.textContent = "";
+        phoneMessage.className = "message";
+      } else if (phonePattern.test(phoneInput.value)) {
+        phoneMessage.textContent = "Valid phone number ✅";
+        phoneMessage.className = "message success";
+      } else {
+        phoneMessage.textContent = "Invalid format ❌ (use (123) 456-7890 or 123-456-7890)";
+        phoneMessage.className = "message error";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Form Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .builder-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    select, button {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .form-field {
+      margin-bottom: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .error {
+      font-size: 0.9em;
+      color: red;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="builder-container">
+    <h2>Dynamic Form Builder</h2>
+    <div class="controls">
+      <select id="inputType">
+        <option value="">Select Input Type</option>
+        <option value="text">Text</option>
+        <option value="email">Email</option>
+        <option value="password">Password</option>
+      </select>
+      <button id="addInput">Add</button>
+    </div>
+    <form id="dynamicForm"></form>
+  </div>
+
+  <script>
+    const addBtn = document.getElementById("addInput");
+    const inputType = document.getElementById("inputType");
+    const form = document.getElementById("dynamicForm");
+
+    const patterns = {
+      text: /^[A-Za-z\s]{3,}$/,
+      email: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
+      password: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+    };
+
+    addBtn.addEventListener("click", e => {
+      e.preventDefault();
+      const type = inputType.value;
+      if (!type) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("form-field");
+
+      const input = document.createElement("input");
+      input.type = type;
+      input.placeholder = `Enter ${type}`;
+      input.dataset.type = type;
+
+      const error = document.createElement("div");
+      error.className = "error";
+
+      input.addEventListener("blur", () => {
+        const regex = patterns[input.dataset.type];
+        if (regex && !regex.test(input.value)) {
+          error.textContent = `Invalid ${input.dataset.type}`;
+        } else {
+          error.textContent = "";
+        }
+      });
+
+      wrapper.appendChild(input);
+      wrapper.appendChild(error);
+      form.appendChild(wrapper);
+    });
+  </script>
+</body>
+</html>
